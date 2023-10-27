@@ -3,6 +3,13 @@
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
+	  <PackageId>XFrame.Sql.Excel</PackageId>
+	  <Version>7.0.0</Version>
+	  <Authors>Lwandile Mfundisi</Authors>
+	  <Description>XFrame.Sql.Excel is framework for connecting to Microsoft Excel</Description>
+	  <IsPackable>true</IsPackable>
+	  <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);CopyProjectReferencesToPackage</TargetsForTfmSpecificBuildOutput>
+	  <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,5 +20,11 @@
   <ItemGroup>
     <Folder Include="Configurations\" />
   </ItemGroup>
+
+	<Target DependsOnTargets="ResolveReferences" Name="CopyProjectReferencesToPackage">
+		<ItemGroup>
+			<BuildOutputInPackage Include="@(ReferenceCopyLocalPaths-&gt;WithMetadataValue('ReferenceSourceTarget', 'ProjectReference'))" />
+		</ItemGroup>
+	</Target>
 
 </Project>
